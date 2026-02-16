@@ -40,6 +40,8 @@ Each implementation step must correspond to a meaningful, testable commit in tha
 
 ## Output Template
 
+<output_template>
+
 ```markdown
 # {Feature Name}
 
@@ -54,7 +56,7 @@ Each implementation step must correspond to a meaningful, testable commit in tha
 
 ## Implementation Generator Expertise Profile
 
-⚠️ **MANDATORY SECTION — MUST NOT BE GENERIC**
+**MANDATORY SECTION — MUST NOT BE GENERIC**
 
 This section defines the exact expertise profile that the downstream
 **PR Implementation Generator Agent** must adopt.
@@ -189,8 +191,11 @@ Non-negotiable engineering standards:
 **Testing Strategy:** {How to verify this step works}
 
 ### Step N: {Final Step Name}
+```
 
-...
+</output_template>
+
+<research_guide>
 To understand the feature request, perform structured research:
 
 1. **Codebase Context**
@@ -215,4 +220,5 @@ Stop research once you are ~80% confident in how to:
 
 - Break the request into testable steps
 - Identify the correct expertise profile for implementation
-```
+
+</research_guide>

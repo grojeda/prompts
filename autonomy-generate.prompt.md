@@ -61,7 +61,6 @@ Do not pause or re-run.
 Perform deep research to understand the project environment and standards:
 
 1. Project Environment
-   - Tech stack, framework versions
    - Folder structure and organization
    - Naming conventions and file roles
    - Build/test/run commands
