@@ -11,7 +11,7 @@ and to strictly adopt and enforce the Implementation Generator Expertise Profile
 
 ## Your Responsibilities
 
-1. Accept the completed plan file (plans/{feature-name}/spec.md)
+1. Accept the completed plan file (plans/{feature-name}/plan.md)
 2. Extract:
 
 - Feature name and target branch
@@ -19,15 +19,15 @@ and to strictly adopt and enforce the Implementation Generator Expertise Profile
 - Affected files
 - Implementation Generator Expertise Profile (Primary Role, Technologies & Libraries, Standards)
 
-3. Read ONLY the documents listed in `## Required Documentation` from spec.md (local files via `read_file`, external URLs via `fetch_webpage`)
-4. Generate a file: plans/{feature-name}/plan.md using <plan_template>
+3. Read ONLY the documents listed in `## Required Documentation` from plan.md (local files via `read_file`, external URLs via `fetch_webpage`)
+4. Generate a file: plans/{feature-name}/implementation.md using <plan_template>
 5. Ensure all instructions are concrete and directly executable
 
 ## Workflow
 
 ### Step 1: Parse the Plan
 
-Read the full spec.md content before applying the workflow steps below. When spec.md is large, process its complete content first — instructions and template come after.
+Read the full plan.md content before applying the workflow steps below. When plan.md is large, process its complete content first — instructions and template come after.
 
 - Extract feature metadata (name, branch)
 - Parse all implementation steps in order
@@ -40,7 +40,7 @@ Read the full spec.md content before applying the workflow steps below. When spe
 
 ### Step 2: Read Required Documentation (One Time Only)
 
-MANDATORY: Read every document listed in `## Required Documentation` from spec.md:
+MANDATORY: Read every document listed in `## Required Documentation` from plan.md:
 - For local file paths: use `read_file` (with line ranges when specified). When reading multiple local files, read them in parallel.
 - For external URLs: use `fetch_webpage`
 
@@ -88,7 +88,7 @@ Perform deep research to understand the project environment and standards:
    - Permission or integration caveats
 
 4. Official Docs
-   - Read ONLY the documents listed in `## Required Documentation` from spec.md
+   - Read ONLY the documents listed in `## Required Documentation` from plan.md
    - Do NOT fetch generic documentation or load skill indexes
    - Extract only what is needed to confirm syntax, API signatures, and version-specific behaviors for this feature
 
@@ -200,20 +200,20 @@ Before saving the plan file, verify:
 - Every step has a STOP & COMMIT marker.
 - Every Human check that cannot be performed at its step is explicitly deferred — not omitted — to the correct integration step, grouped in a labeled block matching its origin step.
 - No integration step is missing deferred checks from any prior step.
-- All code strictly follows the Implementation Generator Expertise Profile from spec.md.
+- All code strictly follows the Implementation Generator Expertise Profile from plan.md.
 
 ## Output File
 
 MANDATORY: Save the implementation file to path:  
-`plans/{feature-name}/plan.md`
+`plans/{feature-name}/implementation.md`
 
 ## Hard Rules
 
 - Write complete, tested code for every step. Do not write partial implementations or speculative code.
 - Every code block must be final and executable. Do not use "TODO", "you may want to", or similar.
 - Commit to a single implementation path per step. Do not include alternative paths or optional decisions.
-- Implement every step in the exact order defined by spec.md. Do not skip steps unless explicitly marked as skipped in the plan. Do not change the structure or order.
-- Adopt the Implementation Generator Expertise Profile from spec.md as a non-negotiable contract. Do not deviate from it. If the profile is missing, generic, or inconsistent, STOP and ask for clarification.
+- Implement every step in the exact order defined by plan.md. Do not skip steps unless explicitly marked as skipped in the plan. Do not change the structure or order.
+- Adopt the Implementation Generator Expertise Profile from plan.md as a non-negotiable contract. Do not deviate from it. If the profile is missing, generic, or inconsistent, STOP and ask for clarification.
 - **Deferred verifications:** Human checks that cannot be performed at their step (because the component is not yet rendered in the app) must be deferred — not omitted — to the step where they first become observable. At that integration step, list them in labeled blocks before the step's own Human checks: `*Deferred from Step N ({name}):*`. Every deferred check must appear exactly once in the plan.
 
 ## Contextual Intelligence

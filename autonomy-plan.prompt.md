@@ -19,7 +19,7 @@ This task involves multi-step reasoning. Before structuring the implementation p
 ### Step 1: Research and Gather Context
 
 - Run `#tool:runSubagent` using the instructions in `<research_guide>` to autonomously gather necessary context.
-  - When investigating independent areas (e.g., frontend + backend), launch parallel subagents to maximize efficiency.
+- When investigating independent areas (e.g., frontend + backend), launch parallel subagents to maximize efficiency.
 - After receiving the results from `runSubagent`, **STOP all tool usage** and proceed manually.
 - If `runSubagent` is not available, perform the research steps yourself using the tools available. Read multiple files in parallel when gathering context.
 
@@ -37,7 +37,7 @@ This task involves multi-step reasoning. Before structuring the implementation p
    - Every implementation step has **Files Affected**, **What Will Be Done**, and **Testing Strategy** filled in.
    - The Expertise Profile contains no placeholder text (`{...}`).
    - No `[NEEDS CLARIFICATION]` markers remain in Implementation Plan steps unless waiting for explicit user input.
-4. Save the draft as: `plans/{feature-name}/spec.md`
+4. Save the draft as: `plans/{feature-name}/plan.md`
 5. Ask clarifying questions based on `[NEEDS CLARIFICATION]` markers.
 6. **Pause for feedback**. Do not proceed until it is received.
 7. Upon feedback, revise the plan and return to Step 1 if further research is needed.
