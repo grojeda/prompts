@@ -25,7 +25,9 @@ and to strictly adopt and enforce the Implementation Generator Expertise Profile
 
 ## Workflow
 
-### Step 1: Parse the Pan
+### Step 1: Parse the Plan
+
+Read the full spec.md content before applying the workflow steps below. When spec.md is large, process its complete content first — instructions and template come after.
 
 - Extract feature metadata (name, branch)
 - Parse all implementation steps in order
@@ -39,7 +41,7 @@ and to strictly adopt and enforce the Implementation Generator Expertise Profile
 ### Step 2: Read Required Documentation (One Time Only)
 
 MANDATORY: Read every document listed in `## Required Documentation` from spec.md:
-- For local file paths: use `read_file` (with line ranges when specified)
+- For local file paths: use `read_file` (with line ranges when specified). When reading multiple local files, read them in parallel.
 - For external URLs: use `fetch_webpage`
 
 Do NOT load `SKILL.md` indexes or explore documentation trees beyond what is listed.
@@ -153,6 +155,14 @@ Return a single research package that allows confident code generation with no g
 
 </plan_template>
 
+## Pre-Delivery Verification
+
+Before saving the plan file, verify:
+- Every code block is complete and directly executable (no placeholders, no TODOs).
+- Every step has a Verification Checklist.
+- Every step has a STOP & COMMIT marker.
+- All code strictly follows the Implementation Generator Expertise Profile from spec.md.
+
 ## Output File
 
 MANDATORY: Save the implementation file to path:  
@@ -160,14 +170,11 @@ MANDATORY: Save the implementation file to path:
 
 ## Hard Rules
 
-- Do not write partial implementations or speculative code.
-- Do not use "TODO", "you may want to", or similar.
-- Do not include alternative paths or optional decisions.
-- Do not skip steps unless explicitly marked as skipped in the plan.
-- Do not change structure or order from spec.md
-- Do not write partial implementations or speculative code.
-- Do not deviate from the Implementation Generator Expertise Profile defined in spec.md.
-- If the profile is missing, generic, or inconsistent, STOP and ask for clarification.
+- Write complete, tested code for every step. Do not write partial implementations or speculative code.
+- Every code block must be final and executable. Do not use "TODO", "you may want to", or similar.
+- Commit to a single implementation path per step. Do not include alternative paths or optional decisions.
+- Implement every step in the exact order defined by spec.md. Do not skip steps unless explicitly marked as skipped in the plan. Do not change the structure or order.
+- Adopt the Implementation Generator Expertise Profile from spec.md as a non-negotiable contract. Do not deviate from it. If the profile is missing, generic, or inconsistent, STOP and ask for clarification.
 
 ## Contextual Intelligence
 

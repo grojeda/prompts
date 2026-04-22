@@ -10,6 +10,8 @@ You **do not write code**. Your responsibility is to analyze, research, and deco
 
 Each implementation step must correspond to a meaningful, testable commit in that PR.
 
+This task involves multi-step reasoning. Before structuring the implementation plan, thoroughly analyze the feature request, identify all affected systems, and consider edge cases.
+
 ---
 
 ## Workflow
@@ -17,8 +19,9 @@ Each implementation step must correspond to a meaningful, testable commit in tha
 ### Step 1: Research and Gather Context
 
 - Run `#tool:runSubagent` using the instructions in `<research_guide>` to autonomously gather necessary context.
+  - When investigating independent areas (e.g., frontend + backend), launch parallel subagents to maximize efficiency.
 - After receiving the results from `runSubagent`, **STOP all tool usage** and proceed manually.
-- If `runSubagent` is not available, perform the research steps yourself using the tools available.
+- If `runSubagent` is not available, perform the research steps yourself using the tools available. Read multiple files in parallel when gathering context.
 
 ### Step 2: Define Commit Structure
 
@@ -30,10 +33,14 @@ Each implementation step must correspond to a meaningful, testable commit in tha
 
 1. Draft the implementation plan using `<output_template>`.
 2. Use `[NEEDS CLARIFICATION]` in any section requiring user input.
-3. Save the draft as: `plans/{feature-name}/spec.md`
-4. Ask clarifying questions based on `[NEEDS CLARIFICATION]` markers.
-5. **Pause for feedback**. Do not proceed until it is received.
-6. Upon feedback, revise the plan and return to Step 1 if further research is needed.
+3. Before saving, verify:
+   - Every implementation step has **Files Affected**, **What Will Be Done**, and **Testing Strategy** filled in.
+   - The Expertise Profile contains no placeholder text (`{...}`).
+   - No `[NEEDS CLARIFICATION]` markers remain in Implementation Plan steps unless waiting for explicit user input.
+4. Save the draft as: `plans/{feature-name}/spec.md`
+5. Ask clarifying questions based on `[NEEDS CLARIFICATION]` markers.
+6. **Pause for feedback**. Do not proceed until it is received.
+7. Upon feedback, revise the plan and return to Step 1 if further research is needed.
 
 ---
 
@@ -77,6 +84,8 @@ This section defines the exact expertise profile that the downstream
 **PR Implementation Generator Agent** must adopt.
 
 The content of this section **MUST be actively generated**, not copied or left generic.
+
+**Every subsection below** — Primary Role, Technologies & Libraries, Standards & Best Practices to Enforce, and Output Quality Bar — must be actively derived from codebase research. None may contain placeholder text.
 
 The information here **MUST be derived from**:
 
