@@ -61,6 +61,10 @@ If a listed document is missing or contradicts the declared stack, STOP and requ
   - STOP & COMMIT markers after each step
   - No placeholders, no TODOs, no ambiguity
   - All code MUST strictly follow the Primary Role and use ONLY the Technologies & Libraries defined in the plan
+- Before writing any Verification Checklist, determine whether the step's output is observable in the browser at this point (i.e., the component or change is already rendered in the app). Apply the following rules:
+  - **Automated checks** (lint, build, typecheck, unit tests): always include in the step where they apply. The agent runs these before stopping.
+  - **Human checks** (browser/UI behavior): only include them in the step where the behavior is first observable. If a step creates a component not yet integrated into any page or layout, defer all its Human checks to the integration step.
+  - **Deferred checks**: at the integration step, group all deferred Human checks before the step's own Human checks, using labeled blocks per origin step (see `<plan_template>`).
 
 <research_task>
 
@@ -128,14 +132,19 @@ Return a single research package that allows confident code generation with no g
 
 ##### Step 1 Verification Checklist
 
-- [ ] No build errors
-- [ ] Specific instructions for UI verification (if applicable)
+**Automated (agent runs before stopping):**
+- [ ] `{command}` — {expected result}
+
+**Human (verify in browser before committing):**
+- [ ] {Specific observable behavior in the browser}
 
 #### Step 1 STOP & COMMIT
 
-**STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
+**Agent:** Run all Automated checks above and confirm they pass before stopping.
 
-#### Step 2: {Action}
+**STOP & COMMIT:** Wait for the human to verify all Human checks in the browser, then stage and commit before continuing.
+
+#### Step 2: {Action — creates component not yet integrated into any page}
 
 - [ ] {Specific Instruction 1}
 - [ ] Copy and paste code below into `{file}`:
@@ -146,12 +155,40 @@ Return a single research package that allows confident code generation with no g
 
 ##### Step 2 Verification Checklist
 
-- [ ] No build errors
-- [ ] Specific instructions for UI verification (if applicable)
+**Automated (agent runs before stopping):**
+- [ ] `{command}` — {expected result}
+
+*(No Human checks — component not yet rendered in the app. Browser verifications deferred to Step N where it is first integrated.)*
 
 #### Step 2 STOP & COMMIT
 
-**STOP & COMMIT:** Agent must stop here and wait for the user to test, stage, and commit the change.
+**Agent:** Run all Automated checks above and confirm they pass before stopping.
+
+**STOP & COMMIT:** Stage and commit after Automated checks pass. No browser verification required at this step.
+
+#### Step N: {Integration step — first step where deferred components are rendered}
+
+- [ ] {Specific Instruction 1}
+
+##### Step N Verification Checklist
+
+**Automated (agent runs before stopping):**
+- [ ] `{command}` — {expected result}
+
+**Human (verify in browser before committing):**
+
+*Deferred from Step 2 ({Component name}):*
+- [ ] {Browser behavior deferred from Step 2}
+- [ ] {Browser behavior deferred from Step 2}
+
+*Step N:*
+- [ ] {Browser behavior specific to this integration step}
+
+#### Step N STOP & COMMIT
+
+**Agent:** Run all Automated checks above and confirm they pass before stopping.
+
+**STOP & COMMIT:** Wait for the human to verify all Human checks above (including all deferred ones) in the browser, then stage and commit before continuing.
 
 </plan_template>
 
@@ -159,8 +196,10 @@ Return a single research package that allows confident code generation with no g
 
 Before saving the plan file, verify:
 - Every code block is complete and directly executable (no placeholders, no TODOs).
-- Every step has a Verification Checklist.
+- Every step has a Verification Checklist with an Automated section.
 - Every step has a STOP & COMMIT marker.
+- Every Human check that cannot be performed at its step is explicitly deferred — not omitted — to the correct integration step, grouped in a labeled block matching its origin step.
+- No integration step is missing deferred checks from any prior step.
 - All code strictly follows the Implementation Generator Expertise Profile from spec.md.
 
 ## Output File
@@ -175,6 +214,7 @@ MANDATORY: Save the implementation file to path:
 - Commit to a single implementation path per step. Do not include alternative paths or optional decisions.
 - Implement every step in the exact order defined by spec.md. Do not skip steps unless explicitly marked as skipped in the plan. Do not change the structure or order.
 - Adopt the Implementation Generator Expertise Profile from spec.md as a non-negotiable contract. Do not deviate from it. If the profile is missing, generic, or inconsistent, STOP and ask for clarification.
+- **Deferred verifications:** Human checks that cannot be performed at their step (because the component is not yet rendered in the app) must be deferred — not omitted — to the step where they first become observable. At that integration step, list them in labeled blocks before the step's own Human checks: `*Deferred from Step N ({name}):*`. Every deferred check must appear exactly once in the plan.
 
 ## Contextual Intelligence
 
