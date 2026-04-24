@@ -229,7 +229,7 @@ To understand the feature request, perform structured research:
 
 2. **Internal Documentation**
    - Read relevant docs and READMEs
-   - Review ADRs (Architecture Decision Records), if present
+   - Review ADRs (Architecture Decision Records) and DDRs (Domain Decision Records), if present
 
 3. **External Dependencies**
    - Investigate required APIs, SDKs, or platform tools
