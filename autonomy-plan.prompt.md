@@ -74,6 +74,29 @@ model: Claude Opus 4.6 (copilot)
 
    {1–2 sentence explanation of the purpose and value of this feature}
 
+    ---
+
+    ## Design Decisions & Discarded Alternatives
+
+    Summary of the key decisions reached during the planning conversation with the user.
+    This section serves as raw material for ADRs and DDRs in the implementation phase.
+
+    ### Decisions Made
+
+    | Decision | Rationale |
+    |----------|-----------|
+    | {decision} | {why this was chosen} |
+
+    ### Alternatives Discarded
+
+    | Alternative | Reason for Discarding |
+    |-------------|----------------------|
+    | {alternative} | {why it was ruled out} |
+
+    ### Open Questions
+
+    - {Any unresolved question that may affect implementation}
+
    ---
 
    ## Required Documentation
